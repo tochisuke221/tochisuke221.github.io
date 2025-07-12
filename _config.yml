@@ -5,6 +5,7 @@ url: "https://tochisuke221.github.io"
 
 markdown: kramdown
 highlighter: rouge
+theme: minima
 
 plugins:
   - jekyll-relative-links
@@ -13,16 +14,6 @@ plugins:
 relative_links:
   enabled: true
   collections: false
-
-include:
-  - CONTRIBUTING.md
-  - README.md
-  - LICENSE.md
-  - COPYING.md
-  - CODE_OF_CONDUCT.md
-  - CONTRIBUTING.md
-  - ISSUE_TEMPLATE.md
-  - PULL_REQUEST_TEMPLATE.md
 
 exclude:
   - CLAUDE.md
