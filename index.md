@@ -1,5 +1,5 @@
 # tochisuke docs
 
-### 2025年7月12日
+**2025年7月12日**
 
-[PostgreSQLのアーキテクチャ](posts/2025-07-12-postgresql-architecture.md)
+[PostgreSQLのアーキテクチャ](posts/2025-07-12-postgresql-architecture/index.md.md)
