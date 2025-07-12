@@ -1,0 +1,6 @@
+title: "tochisuke docs"
+description: "個人ブログ"
+url: "https://tochisuke221.github.io"
+
+plugins:
+  - jekyll-seo-tag
