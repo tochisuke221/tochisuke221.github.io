@@ -14,3 +14,8 @@ category: "DB/PostgreSQL"
 
 #### きっかけ
 ここでは
+
+```ruby
+class A
+end
+```
