@@ -1,0 +1,50 @@
+title: tochisuke docs
+email: your-email@example.com
+description: >- 
+  技術ブログ - 学習と積み上げの記録
+baseurl: ""
+url: "https://tochisuke221.github.io"
+twitter_username: Web_TochiTech
+github_username: tochisuke221
+
+markdown: kramdown
+highlighter: rouge
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+permalink: /posts/:title/
+
+# Build settings
+sass:
+  style: compressed
+
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - CLAUDE.md
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /:collection/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "tochisuke221"

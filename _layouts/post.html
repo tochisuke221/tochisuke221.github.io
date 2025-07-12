@@ -1,0 +1,18 @@
+---
+layout: default
+---
+
+<article class="post-content">
+    <header>
+        <h2>{{ page.title }}</h2>
+        <p class="post-date">{{ page.date | date: "%Y-%m-%d" }}
+            {% if page.category %}<span class="category">{{ page.category }}</span>{% endif %}
+        </p>
+    </header>
+    
+    {{ content }}
+    
+    <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e1e4e8;">
+        <p><a href="{{ site.baseurl }}/" style="color: #0366d6; text-decoration: none;">&larr; ホームに戻る</a></p>
+    </footer>
+</article>
