@@ -11,7 +11,7 @@ PostgreSQL のアーキテクチャを知らないと、スロークエリの実
 まず基本的構成を知るには、下記の図がわかりやすい。
 
 ![PostgreSQLアーキテクチャ](./postgre.png)
-https://www.fujitsu.com/jp/products/software/resources/feature-stories/postgres/article-index/architecture-overview/
+[Fujitsu PostgreSQL アーキテクチャ概要](https://www.fujitsu.com/jp/products/software/resources/feature-stories/postgres/article-index/architecture-overview/)
 
 下記に重要な構成要素を一部抜粋する
 
@@ -60,7 +60,7 @@ PostgreSQL 全体で確保されるメモリのことで、バックグランド
 
 ## 主なアーキテクチャ
 
-PostgreSQLにおいて個人的に特徴的だと思うアーキテクチャについてもまとめておく
+PostgreSQL において個人的に特徴的だと思うアーキテクチャについてもまとめておく
 
 ### 追記型アーキテクチャ
 
@@ -78,23 +78,25 @@ PostgreSQL では、追記型アーキテクチャーを採用していて、UPD
 その場合、autovacuum の設定値の調整や、VACUUM FULL コマンドで不要領域を削除し、データ量の肥大化を抑えることを検討します。なお、VACUUM FULL コマンドは、テーブルに強いロックがかかる点と、処理に時間がかかる点を十分に考慮した上で利用する必要がある。
 
 ### データ更新とチェックポイント
-PostgreSQLでは、更新時に共有バッファでキャッシュされたデータにアクセスするが、共有バッファー上で更新されたダーティーページはすぐにデータファイル（ディスク）への書き出しが行われない。
 
-まず、トランザクションの更新ログ（WAL）をWALバッファーに格納し、COMMITのタイミングでWALファイルへ書き出す。
+PostgreSQL では、更新時に共有バッファでキャッシュされたデータにアクセスするが、共有バッファー上で更新されたダーティーページはすぐにデータファイル（ディスク）への書き出しが行われない。
+
+まず、トランザクションの更新ログ（WAL）を WAL バッファーに格納し、COMMIT のタイミングで WAL ファイルへ書き出す。
 これはデータベースの更新処理の高速化と障害発生時のデータ補償を両立するためである。
 
 実際にデータファイルへの書き出しは、定期的なチェックポイント処理が行われる際に行う。
-その際に同時に不要なWALファイルも削除する。
+その際に同時に不要な WAL ファイルも削除する。
 
 ![チェックポイント](./checkpoint.png)
 
 ### マルチプロセス
-PostgreSQLはマルチプロセスタイプのアーキテクチャである。
-（対象にMySQLはマルチスレッドである）
-https://zenn.dev/farstep/articles/process-thread-difference
 
-つまり、PostgreSQLのように接続ごとに子プロセスをforkするモデルなのに対して
-MySQLはプロセス数は基本的に1、スレッド数でスケールする構成になっている。
+PostgreSQL はマルチプロセスタイプのアーキテクチャである。
+（対象に MySQL はマルチスレッドである）
+[プロセスとスレッドの違いについて](https://zenn.dev/farstep/articles/process-thread-difference)
+
+つまり、PostgreSQL のように接続ごとに子プロセスを fork するモデルなのに対して
+MySQL はプロセス数は基本的に 1、スレッド数でスケールする構成になっている。
 
 そもそも、これら２つの設計思想が下記のように異なるため当然アーキテクチャも異なる
 
@@ -103,9 +105,9 @@ MySQLはプロセス数は基本的に1、スレッド数でスケールする�
 - PostgreSQL
   - 高機能、堅牢性
 
-参考: https://scrapbox.io/knowledgeboxEngawa/PostgreSQL_%E3%83%9E%E3%83%AB%E3%83%81%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6
+参考: [PostgreSQL マルチプロセスについて](https://scrapbox.io/knowledgeboxEngawa/PostgreSQL_%E3%83%9E%E3%83%AB%E3%83%81%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
 
-参考; https://kinsta.com/jp/blog/postgresql-vs-mysql/?utm_source=chatgpt.com
+参考: [PostgreSQL vs MySQL 比較](https://kinsta.com/jp/blog/postgresql-vs-mysql/?utm_source=chatgpt.com)
 
 ---
 
