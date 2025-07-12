@@ -5,7 +5,7 @@ url: "https://tochisuke221.github.io"
 
 markdown: kramdown
 highlighter: rouge
-theme: minima
+remote_theme: pages-themes/minimal@v0.2.0
 
 plugins:
   - jekyll-relative-links
