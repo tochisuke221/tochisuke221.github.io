@@ -163,6 +163,6 @@ end
 
 ## シーク法について
 シーク法についてはこの辺の資料がわかりやすかった
-- https://shopify.engineering/pagination-relative-cursors
-- https://www.slideshare.net/slideshow/p2d2-pagination-done-the-postgresql-way/22210863#8
-- https://docs.gitlab.com/development/database/pagination_guidelines/
+- [https://shopify.engineering/pagination-relative-cursors](https://shopify.engineering/pagination-relative-cursors)
+- [https://www.slideshare.net/slideshow/p2d2-pagination-done-the-postgresql-way/22210863#8](https://www.slideshare.net/slideshow/p2d2-pagination-done-the-postgresql-way/22210863#8)
+- [https://docs.gitlab.com/development/database/pagination_guidelines/](https://docs.gitlab.com/development/database/pagination_guidelines/)
