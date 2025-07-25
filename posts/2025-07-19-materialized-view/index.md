@@ -133,3 +133,9 @@ https://pganalyze.com/blog/materialized-views-ruby-rails の記事が使い方�
   - [BigQueryのドキュメント](https://cloud.google.com/bigquery/docs/materialized-views-intro?hl=ja)
   - [[PostgreSQL]複雑なクエリや集計処理に対する参照のパフォーマンスを向上させることのできるマテリアライズドビューについてまとめてみた](https://www.sraoss.co.jp/tech-blog/pgsql/postgresql_ivm/)
   - [TEMPORARY TABLE（一時テーブル）を探る](https://qiita.com/noborus/items/16ea90339a637d0f40f7)
+
+
+
+
+
+
