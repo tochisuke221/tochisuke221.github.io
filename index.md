@@ -2,15 +2,22 @@
 
 <ul>
   <li style="list-style: none">
+    <p>2025年07月26日</p>
+    <h3 id="マテリアライズドビューと一時テーブル">
+      <a href="posts/2025-07-26-firebase-pundit/index.html">Punditを用いた認証情報の変更の認可処理</a>
+      <!-- AnchorJS を読み込んでいれば自動で <a class="anchorjs-link">…</a> が挿入されます -->
+    </h3>
+  </li>
+  <li style="list-style: none">
     <p>2025年07月19日</p>
-    <h3 id="PostgreSQLのアーキテクチャ">
+    <h3 id="マテリアライズドビューと一時テーブル">
       <a href="posts/2025-07-19-materialized-view/index.html">マテリアライズドビューと一時テーブル（TEMPORARY TABLE）</a>
       <!-- AnchorJS を読み込んでいれば自動で <a class="anchorjs-link">…</a> が挿入されます -->
     </h3>
   </li>
   <li style="list-style: none">
     <p>2025年07月16日</p>
-    <h3 id="PostgreSQLのアーキテクチャ">
+    <h3 id="ソート順序を維持したバッチ処理ができる">
       <a href="posts/2025-07-15-sort-batch-method/index.html">ソート順序を維持したバッチ処理ができる(Rails8より)</a>
       <!-- AnchorJS を読み込んでいれば自動で <a class="anchorjs-link">…</a> が挿入されます -->
     </h3>
