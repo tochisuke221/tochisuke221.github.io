@@ -2,8 +2,15 @@
 
 <ul>
   <li style="list-style: none">
+    <p>2025年08月04日</p>
+    <h3 id="履歴テーブルについて">
+      <a href="posts/2025-08-04-history-table/index.html">履歴テーブルについて</a>
+      <!-- AnchorJS を読み込んでいれば自動で <a class="anchorjs-link">…</a> が挿入されます -->
+    </h3>
+  </li>
+  <li style="list-style: none">
     <p>2025年07月26日</p>
-    <h3 id="マテリアライズドビューと一時テーブル">
+    <h3 id="Punditを用いた認証情報の変更の認可処理">
       <a href="posts/2025-07-26-firebase-pundit/index.html">Punditを用いた認証情報の変更の認可処理</a>
       <!-- AnchorJS を読み込んでいれば自動で <a class="anchorjs-link">…</a> が挿入されます -->
     </h3>
