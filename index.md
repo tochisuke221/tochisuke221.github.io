@@ -4,7 +4,7 @@
   <li style="list-style: none">
     <p>2025年08月09日</p>
     <h3 id="バリデーションについて">
-      <a href="posts/2025-08-04-history-table/index.html">バリデーションについて</a>
+      <a href="posts/2025-08-09-rails-validation/index.html">バリデーションについて</a>
     </h3>
   </li>
     <p>2025年08月04日</p>
