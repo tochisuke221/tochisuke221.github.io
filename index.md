@@ -7,6 +7,7 @@
       <a href="posts/2025-08-09-rails-validation/index.html">バリデーションについて</a>
     </h3>
   </li>
+  <li style="list-style: none">
     <p>2025年08月04日</p>
     <h3 id="履歴テーブルについて">
       <a href="posts/2025-08-04-history-table/index.html">履歴テーブルについて</a>
