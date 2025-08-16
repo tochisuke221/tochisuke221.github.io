@@ -2,6 +2,12 @@
 
 <ul>
   <li style="list-style: none">
+    <p>2025年08月16日</p>
+    <h3 id="システムで時刻を扱う難しさと注意点">
+      <a href="posts/2025-08-16-time-for-system/index.html">システムで時刻を扱う難しさと注意点</a>
+    </h3>
+  </li>
+  <li style="list-style: none">
     <p>2025年08月09日</p>
     <h3 id="バリデーションについて">
       <a href="posts/2025-08-09-rails-validation/index.html">バリデーションについて</a>
