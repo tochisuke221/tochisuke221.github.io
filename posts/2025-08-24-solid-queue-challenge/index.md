@@ -213,6 +213,14 @@ development:
 
 再起動しないと反映しないので注意
 
+
+**6. ダッシュボード**
+
+mission_control-jobsでダッシュボードの表示も可能。
+リトライなどもUIからできる。（Sidekiqのほうがいい感じのUIだな、、、笑）
+
+<img src="./dashboard.png">
+
 ## Solid Queueの基本構成
 
 なんとなく色々触ってみてふーんって感じになったので、あらためてまとめてみる。
@@ -304,6 +312,8 @@ Supervisor は 信頼性の要として、 心拍監視と占有解除を担う�
 
 
 
+
+
 ## Sidekiq vs Solid Queue
 
 去年（2024年）のKaigi on Railsのwillnetさんの発表がとてもわかりやすかった
@@ -327,6 +337,7 @@ https://kaigionrails.org/2024/talks/willnet/
 
 - どのキューイングシステムを使うかは、プロダクト特性や機能面で判断した方が良さそう
   - ただし、繰り返しになるがdelayed_jobを使っていて、不便さや辛さを感じているのであれば新規で作るJobに関してはSolidQueueを使って徐々に移行できるようにしておいても良いと思われる
+  - [mission_control-jobs](https://github.com/rails/mission_control-jobs)を使えば、UI経由でジョブに関する情報を表示したりできる
 
 
 ## 参考
