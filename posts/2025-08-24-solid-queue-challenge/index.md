@@ -1,6 +1,6 @@
 # [tochisuke docs](https://tochisuke221.github.io/)
 
-## Rils8のSolid Queueを触ってみた
+## 【Rails8】SolidQueueを触ってみた感触とまとめ
 
 ### 背景
 
