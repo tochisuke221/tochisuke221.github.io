@@ -231,14 +231,10 @@ development:
 
 
 
-なので、全体のフローとしては、
+### 各テーブルの役割
 
-```
-[Scheduled Executions] --(Dispatcherの時刻到来検知)--> [Ready Executions] --(Workerが取得)--> perform
-
-```
-
-### テーブルの役割
+SolidQueueのパフォーマンスの最大化のため関連テーブルは複数ある。
+できるだけ各テーブルを小さくすることで検索処理の負担を小さくしている。また、クエリの単純化にも繋がり、結果としてカバリングインデックスを利用できたりなどの恩恵がを受けられる。そのため、下記のような巧妙なデーターベース設計を採用している。
 
 
 | テーブル名                        | 役割 |
@@ -255,8 +251,86 @@ development:
 | solid_queue_scheduled_executions  | 遅延実行（`wait_until` や `wait` 付きジョブ）の待機行を管理 |
 | solid_queue_semaphores            | セマフォによる排他制御・同時実行数制限を管理 |
 
+なお、テーブルの分割だけでは抜群のパフォーマンスは引き出せない。
+例えば、1つのワーカーがポーリング時にテーブル全体をブロックしてしまうことがあるためだ。
 
-## 
+```SQL
+SELECT id
+  FROM jobs
+  WHERE queue = "default"
+    AND claimed = 0
+  ORDER_BY priority, id
+  LIMIT 2
+  FOR UPDATE;
+```
+
+ただし、PostgreSQLなどはSKIP LOCKEDをサポートしているため「更新対象として実際にロックされた行だけ」を避けて取得できる。つまりテーブル全体を塞がず、他ワーカーが同時並行でポーリングできる。
+
+### Jobのライフサイクル
+ざっくり下記のような感じ
+
+- エンキュ
+  - MyJob.perform_later でまず solid_queue_jobs にレコードが作成され、ジョブ名・引数・キュー名・優先度などが保存される。
+    - 即時実行なら同時に solid_queue_ready_executions にも挿入。
+    - 遅延/予約なら solid_queue_scheduled_executions に入り、時刻到来で Dispatcher が ready_executions へ移送。
+
+- ワーカーの取得
+  - Worker は ready_executions をポーリングし、新規レコードを見つけるとまず 取得権の確保として solid_queue_claimed_executions に書き込み（多重取得防止・所有権表示）。その後solid_queue_ready_executionsを実行。
+
+- 完了処理
+  - ジョブが完了すると、関連するsolid_queue_jobs・solid_queue_ready_executions・solid_queue_claimed_executions のレコードは削除される（=消化済み）。
+
+
+
+つまり、
+- jobs →（即時）ready →（worker が claim）claimed → 実行 → 削除
+- jobs →（予約）scheduled →（dispatcher）ready →（claim）→ 実行 → 削除
+
+
+処理は本質的に「テーブルをポーリングし、必要なレコードを作成・移動・削除する」動きだが、実運用では並列度・ポーリング間隔・優先度/キュー順、取得競合の抑止などの非機能要件が重要になる。
+
+### Supervisorについて
+Supervisor は 信頼性の要として、 心拍監視と占有解除を担う。
+各ワーカーは solid_queue_processes に自分のレコードを作り、last_heartbeat_at を一定間隔で更新します。Supervisor はこのテーブルを定期に点検し、しきい値（既定5分）より古い心拍のプロセスを死亡判定します。
+
+判定後は当該レコードを片付け、同プロセスが solid_queue_claimed_executions に残した「占有中ジョブ」を再取得可能な状態に戻すことで、他のワーカーに引き継がせます。これにより「ワーカーが途中で落ちたせいでジョブが永遠に詰む」という事態を避け、「少なくとも一度は実行される」保証を実現します。
+
+要するに Supervisor は「起動・監視・復旧」を一手に引き受け、DB 上の心拍と占有情報を使って自動で安全側に倒す番人といえる
+
+### インフラ構成
+
+基本的に、SolidQueueはジョブ専用のDBを持つことを推奨している。
+しかし相乗り（単体DB）でも実装はできる。
+
+
+
+## Sidekiq vs Solid Queue
+
+去年（2024年）のKaigi on Railsのwillnetさんの発表がとてもわかりやすかった
+
+https://kaigionrails.org/2024/talks/willnet/
+
+
+## まとめ: 触ったり、調べたりしてわかったこと
+
+一旦わかったことと所感をまとめる
+
+- delayed_jobの完全上位互換といえそう。少なくとも今プロジェクトを始める時にdelayed_jobを使う理由は特になさそう
+- もしすでにdelayed_jobsを使っていても共存することが可能
+  - 段階的に影響の少ないJobから切り出していくことで、スムーズに移行が可能になりそう
+- Sidekiqに比べ、ドルウェアとして切り出す必要がないので、メンテナンス性が高い
+  - また、技術的進歩により、HDDの性能が向上し、DBに対するRedisの優位性が少なくなってきた。結果、安価に用意することができるので、コスト面においてもSidekiqよりも軍配があがりそう。
+  - とはいえ、2万ジョブ/秒のような大量Jobを裁かないといけない場合はSidekiqに軍配が上がる
+- 機能的にはSidekiqのほうが豊富
+  - 複数Jobをバッチという単位でまとめることができたり、 実行数の制限などができる（SolidQueueはできない）
+  - 個人情報などを自動的に暗号化して、セキュリティーを高めてくれる
+
+- どのキューイングシステムを使うかは、プロダクト特性や機能面で判断した方が良さそう
+  - ただし、繰り返しになるがdelayed_jobを使っていて、不便さや辛さを感じているのであれば新規で作るJobに関してはSolidQueueを使って徐々に移行できるようにしておいても良いと思われる
+
 
 ## 参考
-https://guides.rubyonrails.org/active_job_basics.html#queue-order
+- [https://guides.rubyonrails.org/active_job_basics.html#queue-order](https://guides.rubyonrails.org/active_job_basics.html#queue-order)
+
+- [https://blog.appsignal.com/2025/05/07/an-introduction-to-solid-queue-for-ruby-on-rails.html?utm_source=chatgpt.com](https://blog.appsignal.com/2025/05/07/an-introduction-to-solid-queue-for-ruby-on-rails.html?utm_source=chatgpt.com)
+
