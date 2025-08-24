@@ -2,7 +2,7 @@
 
 ## 【Rails8】SolidQueueを触ってみた感触とまとめ
 
-### 背景
+## 背景
 
 ついに自チームでRails8になりそう。
 今までDelayedJobにお世話になっていたが、非同期処理を頻繁に使う我々にとっては、やや物足りない印象の相棒だった。
@@ -11,6 +11,7 @@
 （というより、ただ遊んだときのメモである）
 
 ## Solid Queueとは
+
 **概要**
 
 Solid Queue は、Basecamp/37signals が開発した Rails向けの新しいジョブキューライブラリ。作者は Ruby on Rails を生み出した DHH（David Heinemeier Hansson）であり、Rails 7.1 からは Active Job の公式バックエンド候補 として登場した。
@@ -100,7 +101,6 @@ Enqueued HelloJob (Job ID: 68c36a2a-0834-4d02-b380-df862276657e) to SolidQueue(d
  @successfully_enqueued=true,
  @timezone="UTC">
 app(dev)> 
-
 ```
 
 ワーカーの標準出力にも表示された！いえーい
@@ -111,7 +111,7 @@ app(dev)>
 
 **気になったこと**
 
-soli_queueを導入するともれなく、下記のようなテーブルが作成された。
+solid_queueを導入するともれなく、下記のようなテーブルが作成された。
 
 <img src="tables.png">
 
@@ -249,7 +249,7 @@ SolidQueueのパフォーマンスの最大化のため関連テーブルは複�
 
 できるだけ各テーブルを小さくすることで検索処理の負担を小さくしている。
 
-また、クエリの単純化にも繋がり、結果としてカバリングインデックスを利用できたりなどの恩恵がを受けられる。そのため、下記のような巧妙なデーターベース設計を採用している。
+また、クエリの単純化にも繋がり、結果としてカバリングインデックスを利用できたりなどの恩恵を受けられる。そのため、下記のような巧妙なデータベース設計を採用している。
 
 
 | テーブル名                        | 役割 |
@@ -270,12 +270,12 @@ SolidQueueのパフォーマンスの最大化のため関連テーブルは複�
 
 例えば、1つのワーカーがポーリング時にテーブル全体をブロックしてしまうことがあるためだ。
 
-```SQL
+```sql
 SELECT id
   FROM jobs
   WHERE queue = "default"
     AND claimed = 0
-  ORDER_BY priority, id
+  ORDER BY priority, id
   LIMIT 2
   FOR UPDATE;
 ```
@@ -285,13 +285,13 @@ SELECT id
 ### Jobのライフサイクル
 ざっくり下記のような感じ
 
-- エンキュ-
+- エンキュー
   - MyJob.perform_later でまず solid_queue_jobs にレコードが作成され、ジョブ名・引数・キュー名・優先度などが保存される。
     - 即時実行なら同時に solid_queue_ready_executions にも挿入。
     - 遅延/予約なら solid_queue_scheduled_executions に入り、時刻到来で Dispatcher が ready_executions へ移送。
 
 - ワーカーの取得
-  - Worker は ready_executions をポーリングし、新規レコードを見つけるとまず 取得権の確保として solid_queue_claimed_executions に書き込み（多重取得防止・所有権表示）。その後solid_queue_ready_executionsを実行。
+  - Worker は ready_executions をポーリングし、新規レコードを見つけるとまず 取得権の確保として solid_queue_claimed_executions に書き込み（多重取得防止・所有権表示）。その後solid_queue_ready_executionsのレコードを削除。
 
 - 完了処理
   - ジョブが完了すると、関連するsolid_queue_jobs・solid_queue_ready_executions・solid_queue_claimed_executions のレコードは削除される（=消化済み）。
@@ -337,7 +337,7 @@ Supervisor は 信頼性の要として、 心拍監視と占有解除を担う�
 - delayed_jobの完全上位互換といえそう。少なくとも今プロジェクトを始める時にdelayed_jobを使う理由は特になさそう
 - もしすでにdelayed_jobsを使っていても共存することが可能
   - 段階的に影響の少ないJobから切り出していくことで、スムーズに移行が可能になりそう
-- Sidekiqに比べ、ドルウェアとして切り出す必要がないので、メンテナンス性が高い
+- Sidekiqに比べ、ミドルウェアとして切り出す必要がないので、メンテナンス性が高い
   - また、技術的進歩により、HDDの性能が向上し、DBに対するRedisの優位性が少なくなってきた。結果、安価に用意することができるので、コスト面においてもSidekiqよりも軍配があがりそう。
   - とはいえ、2万ジョブ/秒のような大量Jobを裁かないといけない場合はSidekiqに軍配が上がる
 - 機能的にはSidekiqのほうが豊富
