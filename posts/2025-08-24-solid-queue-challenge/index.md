@@ -156,7 +156,7 @@ end
 config/queue.ymlでキューの順序を設定できる
 
 
-```yml
+```yaml
 default: &default
   dispatchers:
     - polling_interval: 1
@@ -175,7 +175,6 @@ test:
 
 production:
   <<: *default
-
 ```
 
 また、priorityでも定義できる
@@ -205,13 +204,12 @@ q.paused?       #=> false
 
 config/recurring.yml に以下を追加して起動中の scheduler に拾わせることができる。
 
-```yml
+```yaml
 development:
   demo_recurring:
     class: HelloJob
     args: ["from_recurring"]
     schedule: every 30 seconds
-
 ```
 
 再起動しないと反映しないので注意
