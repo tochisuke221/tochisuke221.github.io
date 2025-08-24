@@ -91,7 +91,7 @@ DB制約されているものは全てRailsのレイヤーでも検証を行う�
 ## おまけ
 個人的に、Policyなど使ってない段階で、下記のような管理者は〇〇を変更できません。といったような権限的なチェックをバリデーションに実装することはあまり好きではない
 
-```rub
+```ruby
   validate :validate_admin_changes, on: :admin_update
 
   private
