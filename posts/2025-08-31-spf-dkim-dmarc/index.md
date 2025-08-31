@@ -102,4 +102,5 @@ default._bimi.example.com IN TXT "v=BIMI1; l=https://example.com/logo.svg; a=htt
 SendGridで「Domain Authentication」の設定をしいれば、 SPF/DKIMが独自ドメインで認証される。他のユーザからの影響を受けず、ドメインレピュテーションを独自に制御できるため、到達率の向上が期待される。
 
 参考1: [https://sendgrid.kke.co.jp/blog/?p=10883](https://sendgrid.kke.co.jp/blog/?p=10883)
+
 参考2: [https://www.twilio.com/docs/sendgrid/ui/sending-email/how-to-implement-dmarc?utm_source=chatgpt.com](https://www.twilio.com/docs/sendgrid/ui/sending-email/how-to-implement-dmarc?utm_source=chatgpt.com)
