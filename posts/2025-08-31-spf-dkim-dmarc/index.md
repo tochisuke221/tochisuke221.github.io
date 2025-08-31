@@ -1,6 +1,6 @@
 # [tochisuke docs](https://tochisuke221.github.io/)
 
-## 【メール認証】SPFとDKIMとDMARCとBIMI
+## 【メール認証技術】SPFとDKIMとDMARCとBIMI
 
 ## 背景
 

@@ -2,6 +2,12 @@
 
 <ul>
   <li style="list-style: none">
+    <p>2025年08月31日</p>
+    <h3 id="【メール認証技術】SPFとDKIMとDMARCとBIMI">
+      <a href="./posts/2025-08-31-spf-dkim-dmarc">【メール認証技術】SPFとDKIMとDMARCとBIMI</a>
+    </h3>
+  </li>
+  <li style="list-style: none">
     <p>2025年08月24日</p>
     <h3 id="【Rails8】SolidQueueを触ってみた感触とまとめ">
       <a href="./posts/2025-08-24-solid-queue-challenge/index.html">【Rails8】SolidQueueを触ってみた感触とまとめ</a>
