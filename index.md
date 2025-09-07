@@ -4,13 +4,13 @@
   <li style="list-style: none">
     <p>2025年09月07日</p>
     <h3 id="可観測性とテレメトリに関する基礎（MELT）">
-      <a href="./posts/2025-09-07-log-and-trace.html">可観測性とテレメトリに関する基礎（MELT）</a>
+      <a href="./posts/2025-09-07-log-and-trace/index.html">可観測性とテレメトリに関する基礎（MELT）</a>
     </h3>
   </li>
   <li style="list-style: none">
     <p>2025年08月31日</p>
     <h3 id="【メール認証技術】SPFとDKIMとDMARCとBIMI">
-      <a href="./posts/2025-08-31-spf-dkim-dmarc.html">【メール認証技術】SPFとDKIMとDMARCとBIMI</a>
+      <a href="./posts/2025-08-31-spf-dkim-dmarc/index.html">【メール認証技術】SPFとDKIMとDMARCとBIMI</a>
     </h3>
   </li>
   <li style="list-style: none">
