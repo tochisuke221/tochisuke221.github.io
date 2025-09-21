@@ -2,6 +2,12 @@
 
 <ul>
   <li style="list-style: none">
+    <p>2025年09月21日</p>
+    <h3 id="Reactコンポーネントのデザイン時に意識すべきこと">
+      <a href="./posts/2025-09-21-components-interface/index.html">Reactコンポーネントのデザイン時に意識すべきこと</a>
+    </h3>
+  </li>
+  <li style="list-style: none">
     <p>2025年09月07日</p>
     <h3 id="可観測性とテレメトリに関する基礎（MELT）">
       <a href="./posts/2025-09-07-log-and-trace/index.html">可観測性とテレメトリに関する基礎（MELT）</a>
