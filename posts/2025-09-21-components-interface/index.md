@@ -1,6 +1,6 @@
 # [tochisuke docs](https://tochisuke221.github.io/)
 
-## Reactコンポーネントのデザイン方法
+## Reactコンポーネントのデザイン時に意識すべきこと
 
 
 
