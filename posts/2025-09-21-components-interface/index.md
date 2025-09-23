@@ -141,3 +141,6 @@ const InputWithLabels = (props) =  {
 ReactHookFormなども「表示」と「変化」を分ける設計となっている
 参考: [RHF: Controller](https://react-hook-form.com/docs/usecontroller/controller?utm_source=chatgpt.com)
 
+
+- [コンテナ・プレゼンテーションパターン
+](https://zenn.dev/morinokami/books/learning-patterns-1/viewer/presentational-container-pattern)
