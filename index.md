@@ -2,6 +2,12 @@
 
 <ul>
   <li style="list-style: none">
+    <p>2025年09月30日</p>
+    <h3 id="useWatch vs onChange">
+      <a href="./posts/2025-09-30-useWatch-or-onChange/index.html">useWatch vs onChange</a>
+    </h3>
+  </li>
+  <li style="list-style: none">
     <p>2025年09月21日</p>
     <h3 id="Reactコンポーネントのデザイン時に意識すべきこと">
       <a href="./posts/2025-09-21-components-interface/index.html">Reactコンポーネントのデザイン時に意識すべきこと</a>
