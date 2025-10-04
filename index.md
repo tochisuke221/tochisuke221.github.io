@@ -4,7 +4,7 @@
   <li style="list-style: none">
     <p>2025年10月04日</p>
     <h3 id="アーキテクチャディシジョンレコード（ADR）">
-      <a href="./posts/2025-10-04-adr-template/index.md">アーキテクチャディシジョンレコード（ADR）</a>
+      <a href="./posts/2025-10-04-adr-template/index.html">アーキテクチャディシジョンレコード（ADR）</a>
     </h3>
   </li>
   <li style="list-style: none">
