@@ -2,6 +2,12 @@
 
 <ul>
   <li style="list-style: none">
+    <p>2025年10月12日</p>
+    <h3 id="カスタム例外クラスを作る上での注意">
+      <a href="./posts/2025-10-12-custom-exception-class/index.html">カスタム例外クラスを作る上での注意点</a>
+    </h3>
+  </li>
+  <li style="list-style: none">
     <p>2025年10月04日</p>
     <h3 id="アーキテクチャディシジョンレコード（ADR）">
       <a href="./posts/2025-10-04-adr-template/index.html">アーキテクチャディシジョンレコード（ADR）</a>
