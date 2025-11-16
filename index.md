@@ -2,6 +2,12 @@
 
 <ul>
   <li style="list-style: none">
+    <p>2025年11月16日</p>
+    <h3 id="カスタム例外クラスを作る上での注意">
+      <a href="./posts/2025-11-16-plm-bom-1/index.html">PLM・BOMの基本知識（用語理解）</a>
+    </h3>
+  </li>
+  <li style="list-style: none">
     <p>2025年10月12日</p>
     <h3 id="カスタム例外クラスを作る上での注意">
       <a href="./posts/2025-10-12-custom-exception-class/index.html">カスタム例外クラスを作る上での注意点</a>
