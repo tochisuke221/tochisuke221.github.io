@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm:*)",
+      "WebFetch(domain:kakudou3.github.io)"
+    ],
+    "deny": []
+  }
+}
